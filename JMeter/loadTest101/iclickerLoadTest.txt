@@ -1,0 +1,65 @@
+
+Date: 5/17/15
+Purpose: rough draft for load testing n sessions with m students polling
+
+Create a Session for polling.
+0. Create or use an existing set of Students. Use students.csv
+
+pre
+1 create N users => partyoffive.csv
+
+1. create N courses => partyoffivecourses.csv
+2. create session  for each partyoffivecourses.csv  => partyoffivesessions.csv
+3. create question for each partyoffivesessions.csv => partyoffiveSessionQuestions.csv
+
+other
+Retrieve All answers for each partyoffiveSessionQuestions.csv
+End Question         for each partyoffiveSessionQuestions.csv.
+
+
+
+for 1 to 300
+{
+
+
+1. Create or use an existing Course.          Use existing Course test_Load101.csv
+2. Create a Session for said Course.
+   create a question
+   periodicaly poll the session.
+}
+
+Every two seconds do - for each course-/session-/question 
+GET /question/answer?questionId={question uuid}
+
+[]GET /trogon/v1/question/answer?questionId=22ee4713-fe41-47f9-8e87-bf1991e8f3c2 HTTP/1.1
+
+
+Alternatively, you can define your script as a variable, e.g. on the Test Plan:
+
+SCRIPT          vars.put("name","value")
+The script can then be referenced as follows:
+${__BeanShell(${SCRIPT})}
+
+
+
+3. Join said Course/Session
+4. poll using students.csv.
+
+Clean up Session.
+1. end course/session
+
+
+Api's
+GET /course/session/history?id={course uuid}
+
+Session API
+GET /session/course/create/{session uuid}?courseId={course uuid}?utcOffset={offset}
+GET /session/join/{session alias}?name={name}
+
+GET /session/course/join/{course uuid}
+
+PUT /session/end/{session uuid}
+DELETE /session/delete/{session uuid}
+
+
+GET /session/participants/{session uuid}
